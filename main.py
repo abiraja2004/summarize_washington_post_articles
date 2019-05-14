@@ -7,7 +7,7 @@ import summarize
 app=Flask(__name__)
 
 def valid_url(url):
-    if url.startswith('https://www.washingtonpost.com'):
+    if url.startswith('https://www.washingtonpost.com') or url.startswith('http://washingtonpost.com'):
         return True
     else:
         return False
@@ -27,9 +27,9 @@ def result():
         url = request.form.get('wpost_url')
 
         if not valid_url(url):
-            summary = "Sorry, that was not a valid URL. Make sure to copy the entire link from the Washington Post article."
+            summary = ["Sorry, that was not a valid URL. Make sure to copy the entire link from the Washington Post article."]
         else:
-            summary = summarize.summarize_wpost(url)
+            summary = summarize.summarize_wpost(url, n=5)
 
         # passing the string of our summary to our results template
         return render_template("result.html", summary=summary) 

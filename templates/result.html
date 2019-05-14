@@ -38,7 +38,7 @@
                   <!-- <p class="mb-5">{{summary}}</p> -->
                   <ul class="mb-3">
                         {% for sentence in summary %}
-                        <li class="text-white">{{sentence}}</li>
+                        <li class="text-body font-weight-bold">{{sentence}}</li>
                         {% endfor %}
                   </ul>
                   <br><br>
@@ -65,6 +65,11 @@
       
         <div class="social-icons">
           <ul class="list-unstyled text-center mb-0">
+            <li class="list-unstyled-item">
+            <a href="{{ url_for('home')}}">
+            <i class="fas fa-home"></i>
+            </a>
+            </li>
             <li class="list-unstyled-item">
               <a href="https://github.com/divineunited">
                 <i class="fab fa-github"></i>

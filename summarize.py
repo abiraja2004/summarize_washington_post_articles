@@ -26,7 +26,7 @@ def summarize_wpost(url, n=5, tag='article'):
     sents = sent_tokenize(text)
 
     # Assign stopwords.
-    _stopwords = set(stopwords.words('english') + list(punctuation) + ['’', '‘', '“', '”', '—', 'has', 'was'])
+    _stopwords = set(stopwords.words('english') + list(punctuation) + ['’', '‘', "''", "'", '"', '""', '“', '”', '—', 'var', 'has', 'was', 'said'])
 
     # create a list of words that are not in our stopwords.
     tokenized_words = [word for word in tokenized_words if word not in _stopwords]
@@ -51,8 +51,10 @@ def summarize_wpost(url, n=5, tag='article'):
     # get the N most important sentence INDEXES:
     sents_idx = nlargest(n, ranking, key=ranking.get)
 
-    # get the most important sentences SORTED (so they print in order for the user):
-    final = [sents[j] for j in sorted(sents_idx)]
+    # get the most important sentences SORTED (so they print in order for the user) 
+        # remove the sentence that don't have javascript scraped together in it:
+        # remove sentences that say "Read more:"
+    final = [sents[j] for j in sorted(sents_idx) if ('script.src' not in sents[j]) or ('read more:' not in sents[j])]
 
     return final
 
