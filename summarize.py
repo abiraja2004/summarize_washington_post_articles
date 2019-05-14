@@ -39,7 +39,7 @@ def summarize_wpost(url, n=5, tag='article'):
     # Create the frequency distribution of words so we know the ones that are most mentioned are the most important.
     freq = FreqDist(lemmatizedWords)
 
-    # print(nlargest(20, freq, key=freq.get)) # print this to see your K most weighted words - and then you can add more stop words to clean up the noise.
+    print(nlargest(20, freq, key=freq.get)) # print this to see your K most weighted words - and then you can add more stop words to clean up the noise.
 
     # Using default dict, rank the tokenized sentences per the word frequency weights
     ranking = defaultdict(int) # This default dict is setting our first number as a default = 0 so you can add weights from our frequency distribution above if needed.
@@ -59,9 +59,9 @@ def summarize_wpost(url, n=5, tag='article'):
 
 
 ### TESTING THE FUNCTION:
-# url = 'https://www.washingtonpost.com/technology/2019/05/09/food-delivery-freight-logistics-how-uber-aims-move-things-around-world/'
-url = 'https://www.washingtonpost.com/news/style/wp/2019/05/09/feature/cindy-mccains-life-without-john/'
 
-summary = summarize_wpost(url)
+# url = 'https://www.washingtonpost.com/news/style/wp/2019/05/09/feature/cindy-mccains-life-without-john/'
 
-print(summary)
+# summary = summarize_wpost(url)
+
+# print(summary)

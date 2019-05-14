@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Washington Post Auto-Summarization using Machine Learning</title>
+  <link rel="icon" href="{{ url_for('static', filename='img/washingtonpost_icon.jpg') }}" type="image/gif">
+
+  <!-- Bootstrap core CSS -->
+  <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+
+  <!-- Custom styles for this template -->
+  <link href="{{ url_for('static', filename='css/coming-soon.min.css') }}" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <div class="overlay"></div>
+  <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+    <source src="{{ url_for('static', filename='mp4/tablet.mp4') }}" type="video/mp4">
+  </video>
+
+  <div class="masthead">
+    <div class="masthead-bg"></div>
+    <div class="container h-100">
+      <div class="row h-100">
+        <div class="col-12 my-auto">
+          <div class="masthead-content text-white py-5 py-md-0">
+            <h2 class="mb-3">Washington Post <br>Quick Reader</h2>
+            <p class="mb-5">Don't spend your precious money or time reading entire Washington Post articles. Paste any article link here and the
+              <strong>Machine Learning Natural Language Processing algorithm</strong> behind the scenes of this page will auto-summarize the article for you.</p>
+        <form action="/result" method="POST">
+            <div class="input-group input-group-newsletter">
+              <input type="url" name="wpost_url" class="form-control" placeholder="Enter URL" aria-label="Enter URL" aria-describedby="basic-addon">
+              <div class="input-group-append">
+                <button class="btn btn-secondary" type="submit" value="Submit">Submit</button>
+              </div>
+            </div>
+        </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="social-icons">
+    <ul class="list-unstyled text-center mb-0">
+      <li class="list-unstyled-item">
+        <a href="https://github.com/divineunited">
+          <i class="fab fa-github"></i>
+        </a>
+      </li>
+      <li class="list-unstyled-item">
+        <a href="https://www.linkedin.com/in/danieldukevu/">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="{{ url_for('static', filename='js/coming-soon.min.js') }}"></script>
+
+</body>
+
+</html>
