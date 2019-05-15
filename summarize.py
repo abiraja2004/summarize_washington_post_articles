@@ -10,6 +10,33 @@ from nltk.stem import WordNetLemmatizer
 import scrape
 
 
+
+### NOTE ON GETTING NLTK PACKAGES / TOKENIZERS WORKING ON GOOGLE APP ENGINE:
+# https://stackoverflow.com/questions/53304958/how-can-i-run-nltk-on-app-engine-or-kubernetes
+def init():
+    import logging
+    import nltk
+    from nltk import word_tokenize
+
+    LOGGER = logging.getLogger(__name__)
+
+    LOGGER.info('Catching broad nltk errors')
+    DOWNLOAD_DIR = '/usr/lib/nltk_data'
+    LOGGER.info(f'Saving files to {DOWNLOAD_DIR} ')
+
+    try:
+        tokenized = word_tokenize('x')
+        LOGGER.info(f'Tokenized word: {tokenized}')
+    except Exception as err:
+        LOGGER.info(f'NLTK dependencies not downloaded: {err}')
+        try:
+            nltk.download('punkt', download_dir=DOWNLOAD_DIR)
+        except Exception as e:
+            LOGGER.info(f'Error occurred while downloading file: {e}')
+
+
+
+
 def summarize_wpost(url, n=5, tag='article'):
     '''This function accepts an article link from the Washington Post assuming they have not changed their HTML design and are tagging their article sections with the tag "article" and will scrape the text and use NLP to summarize the article into n sentences (which defaults to 5 sentences) and returns an array of those 5 sentences. This is particularly useful since Washington Post articles are subscription only and cannot be read for free.
     

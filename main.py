@@ -22,6 +22,10 @@ def home():
 @app.route('/result', methods = ['POST'])
 def result():
     summary=''
+    
+    # make sure nltk is installed in this init function:
+    summarize.init()
+
     if request.method == 'POST':
         # from the request form, convert it to a dictionary saved as this variable
         url = request.form.get('wpost_url')
