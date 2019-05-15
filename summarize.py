@@ -1,10 +1,9 @@
-from nltk.tokenize import sent_tokenize,word_tokenize
-from nltk.corpus import stopwords
+from nltk.tokenize import sent_tokenize, word_tokenize
+# from nltk.corpus import stopwords
 from string import punctuation
 from nltk.probability import FreqDist
 from heapq import nlargest
 from collections import defaultdict
-from nltk.corpus import wordnet as wn
 from nltk.stem import WordNetLemmatizer
 
 # custom imports
@@ -25,8 +24,12 @@ def summarize_wpost(url, n=5, tag='article'):
     # Tokenize the sentences
     sents = sent_tokenize(text)
 
-    # Assign stopwords.
-    _stopwords = set(stopwords.words('english') + list(punctuation) + ['’', '‘', "''", "'", '"', '""', '“', '”', '—', 'var', 'has', 'was', 'said'])
+    # Assign stopwords manually from nltk corpus library:
+    # _stopwords = set(stopwords.words('english') + list(punctuation) + ['’', '‘', "''", "'", '"', '""', '“', '”', '—', 'var', 'has', 'was', 'said'])
+    
+    corpus_stopwords = ['i', 'me', 'my', 'myself', 'we', 'our', 'ours', 'ourselves', 'you', "you're", "you've", "you'll", "you'd", 'your', 'yours', 'yourself', 'yourselves', 'he', 'him', 'his', 'himself', 'she', "she's", 'her', 'hers', 'herself', 'it', "it's", 'its', 'itself', 'they', 'them', 'their', 'theirs', 'themselves', 'what', 'which', 'who', 'whom', 'this', 'that', "that'll", 'these', 'those', 'am', 'is', 'are', 'was', 'were', 'be', 'been', 'being', 'have', 'has', 'had', 'having', 'do', 'does', 'did', 'doing', 'a', 'an', 'the', 'and', 'but', 'if', 'or', 'because', 'as', 'until', 'while', 'of', 'at', 'by', 'for', 'with', 'about', 'against', 'between', 'into', 'through', 'during', 'before', 'after', 'above', 'below', 'to', 'from', 'up', 'down', 'in', 'out', 'on', 'off', 'over', 'under', 'again', 'further', 'then', 'once', 'here', 'there', 'when', 'where', 'why', 'how', 'all', 'any', 'both', 'each', 'few', 'more', 'most', 'other', 'some', 'such', 'no', 'nor', 'not', 'only', 'own', 'same', 'so', 'than', 'too', 'very', 's', 't', 'can', 'will', 'just', 'don', "don't", 'should', "should've", 'now', 'd', 'll', 'm', 'o', 're', 've', 'y', 'ain', 'aren', "aren't", 'couldn', "couldn't", 'didn', "didn't", 'doesn', "doesn't", 'hadn', "hadn't", 'hasn', "hasn't", 'haven', "haven't", 'isn', "isn't", 'ma', 'mightn', "mightn't", 'mustn', "mustn't", 'needn', "needn't", 'shan', "shan't", 'shouldn', "shouldn't", 'wasn', "wasn't", 'weren', "weren't", 'won', "won't", 'wouldn', "wouldn't"]
+
+    _stopwords = set(corpus_stopwords + list(punctuation) + ['’', '‘', "''", "'", '"', '""', '“', '”', '—', 'var', 'has', 'was', 'said'])
 
     # create a list of words that are not in our stopwords.
     tokenized_words = [word for word in tokenized_words if word not in _stopwords]
