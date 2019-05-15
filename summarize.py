@@ -6,6 +6,10 @@ from heapq import nlargest
 from collections import defaultdict
 from nltk.stem import WordNetLemmatizer
 
+import logging
+import nltk
+
+
 # custom imports
 import scrape
 
@@ -14,10 +18,7 @@ import scrape
 ### NOTE ON GETTING NLTK PACKAGES / TOKENIZERS WORKING ON GOOGLE APP ENGINE:
 # https://stackoverflow.com/questions/53304958/how-can-i-run-nltk-on-app-engine-or-kubernetes
 def init():
-    import logging
-    import nltk
-    from nltk import word_tokenize
-
+    '''This function is called to check to make sure custom download packages that need installation on the Google App Engine are already installed.'''
     LOGGER = logging.getLogger(__name__)
 
     LOGGER.info('Catching broad nltk errors')
@@ -33,6 +34,18 @@ def init():
             nltk.download('punkt', download_dir=DOWNLOAD_DIR)
         except Exception as e:
             LOGGER.info(f'Error occurred while downloading file: {e}')
+    
+    try:
+        lemmatizer = WordNetLemmatizer()
+        lemmatizedWords = lemmatizer.lemmatize(['foot','feet'])
+        LOGGER.info(f'Lemmatized word: {lemmatizedWords}')
+    except Exception as err:
+        LOGGER.info(f'NLTK dependencies not downloaded: {err}')
+        try:
+            nltk.download('wordnet', download_dir=DOWNLOAD_DIR)
+        except Exception as e:
+            LOGGER.info(f'Error occurred while downloading file: {e}')
+
 
 
 
